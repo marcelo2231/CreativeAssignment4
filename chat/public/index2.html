@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Comments!</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="javascripts/comments.js"></script>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+</head>
+
+<body>
+<div id="middleBar">
+    <label for="name">Comment as: </label><input type="text" id="name" placeholder="Name"><br>
+    <div id="comments">No current Comments</div>
+    <div id="commentFromUser">
+        <form>
+            <p id="UserName"></p>
+            <textarea name="text" rows="14" cols="10" wrap="soft" id="comment" placeholder="Add Comment Here"> </textarea>
+        </form>
+        <div id="menu">
+            <button id="postComment">Post Comment</button>
+            <button id="getComments">Get Comments</button>
+            <button id="deleteComments">Delete All</button>
+        </div>
+    </div>
+</div>
+<div id="findusertab">
+    <form>
+        Find comments from: <input type="text" id="findname" placeholder="Name">
+        <button id="findUser">Find</button>
+    </form>
+    <div id= "usercomments">No current Comments</div>
+</div>
+</body>
+</html>
