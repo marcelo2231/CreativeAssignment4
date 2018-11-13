@@ -1,45 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Chat Room 1</title>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="javascripts/chat.js"></script>
-    <link rel="stylesheet" href="./stylesheets/style.css">
+<title>Comments!</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="javascripts/chat.js"></script>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 </head>
 
-<body id="main-body">
- 
-    
-    
-<form id="messageForm" action="">
-<label for="name">Name: </label><input type="text" id="name" class="nameInput" placeholder="Name"><br>
-<label for="message">Message: </label><input type="text" id="message" class="MessageInput" placeholder="Message"><br>
-</form>
-<button id="postMessage">Send Message</button>
-<br>
-<br>
-<div id="json"></div>
-<div id="done"></div>
-
-<br>
-<br>
-<br>
-<br>
-
-<button id="getChat">Get Comments</button>
-<div id="chat"></div>
-<br>
-<br>
-<br>
-
-<button id="deleteChat">Delete All</button>
-<div id="doneDeleting"></div>
-
-<br>
-<br>
-<br>
-<label for="username">Name: </label><input type="text" id="username" class="nameInput" placeholder="Name"><br>
-<button id="getUserChat">Get User Messages</button>
-<br>
+<body>
+<div id="middleBar">
+    <label for="name">Chat as: </label><input type="text" id="name" placeholder="Name"><br>
+    <div id="chat">No current Messages</div>
+    <div id="commentFromUser">
+        <form>
+            <p id="UserName"></p>
+            <textarea name="text" rows="14" cols="10" wrap="soft" id="message" placeholder="Add Comment Here"> </textarea>
+        </form>
+        <div id="menu">
+            <button id="postMessage">Post Message</button>
+            <button id="getChat">Get Chat</button>
+            <button id="deleteChat">Delete All</button>
+        </div>
+    </div>
+</div>
+<div id="findusertab">
+    <form>
+        Find comments from: <input type="text" id="username" placeholder="Name">
+        <button type="button" id="getUserChat">Find</button>
+    </form>
+    <div id= "usercomments">No current Comments</div>
+</div>
 </body>
 </html>

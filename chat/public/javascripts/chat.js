@@ -59,7 +59,7 @@ $(document).ready(function(){
             everything += "<li>" + com.Name + ": " + com.Message + "</li>";
           }
           everything += "</ul>";
-          $("#chat").html(everything);
+          $("#usercomments").html(everything);
       }
       })
   });
