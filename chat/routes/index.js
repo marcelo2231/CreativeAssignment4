@@ -32,55 +32,41 @@ router.post('/chat', function(req, res, next) {
     });
 });
 
-/* GET messages from all users from database. */
+/* GET messages from all users if no user if given, else give just that user from database. */
+
 router.get('/chat', function(req, res, next) {
-    console.log("GET all chat messages route.");
-    Chat.find(function(err,messageList) {
-      if (err) return console.error(err);
-      else {
-        console.log(messageList);
-        res.json(messageList);
-      }
-    })
+    console.log("In the GET route");
+    var name=req.query["n"];
+    var obj;
+    console.log("finding",name);
+    if(name){
+        obj={Name:name};
+        console.log(obj);
+    }
+    Chat.find(obj,function(err,commentList) { //Calls the find() method on your database
+        if (err) return console.error(err); //If there's an error, print it out
+        else {
+            res.json(commentList);
+        }
+    });
 });
 
-/* POST find messages from a specific user from database and send them back. */
-router.post('/userchat', function(req, res, next) {
-    console.log("POST find an user messages and return them route.");
-    var name = req.body.Name;
-    console.log("Name: ", name);
-    var findString = {Name: name };
-    console.log("Find String: ", findString);
-    Chat.find(findString,function(err,messageList) {
-      if (err) return console.error(err);
-      else {
-        console.log(messageList);
-        res.json(messageList);
-      }
-    })
-});
-
-/* DELETE an specific message. */
-router.delete('/deletemessage', function(req, res, next) {
+/* DELETE an specific message if a message is given as data. */
+router.delete('/chat', function(req, res, next) {
     console.log("DELETE an specific message route.");
     var name = req.body.Name;
     var message = req.body.Message;
-    var removeString = {Name: name, Name: message };
-    Chat.find().remove(removeString, function(err){
+    var obj;
+    if (name){
+        obj={Name: name, Name: message }
+    }
+    Chat.find().remove(obj, function(err){
         if(err) console.log("Unable to delete user comment. Error: ", err); 
         else res.sendStatus(200); 
     });
 });
 
-/* DELETE all messages. */
-router.delete('/deleteall', function(req, res, next) {
-    console.log("DELETE all comments route.");
-    console.log(req.body);
-    Chat.find().remove(function(err){
-        if(err) return console.error(err);
-        else res.sendStatus(200);
-    });
-});
+
 
 /* Set module exports to router */
 module.exports = router;
