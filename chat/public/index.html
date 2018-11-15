@@ -78,7 +78,7 @@
                 <ul class="comments">
                     <li ng-repeat="commentinfo in usercomments">
                     <div class="individualComment">
-                        <p ng-style="{'color: commentinfo.Color'}">{{commentinfo.Name}} :: {{commentinfo.Message}}</p>
+                        <p style="{{commentinfo.Color}}">{{commentinfo.Name}} :: {{commentinfo.Message}}</p>
                         <p2 ng-click="deleteComment(commentinfo) " style="cursor:pointer "> X</p2>
                     </div>
                     </li>
@@ -89,7 +89,7 @@
                 <ul class="comments" ng-init="init() ">
                     <li ng-repeat="commentinfo in allcomments">
                         <div class="individualComment">
-                            <p>{{commentinfo.Name}} :: {{commentinfo.Message}}</p>
+                            <p style="color:{{commentinfo.Color}}">{{commentinfo.Name}} :: {{commentinfo.Message}}</p>
                             <p2 ng-click="deleteComment(commentinfo) " style="cursor:pointer "> X</p2>
                         </div>
                     </li>

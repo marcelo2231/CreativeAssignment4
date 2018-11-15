@@ -111,14 +111,12 @@ app.controller('commentsTabCtrl',
     $scope.color=color;
     console.log("name",$scope.name,sessionname);
     $interval(function(){
-            $scope.refresh();
-        },2000);
+            //$scope.refresh();
+        },5000);
 
     $scope.refresh = function() {
       $http.get("/chat?Session="+$scope.keyForSession).then(function(response) {
-        console.log(response);
         $scope.allcomments = response["data"];
-        console.log($scope.allcomments);
         //$scope.color=response.data[
       });
     };
@@ -126,8 +124,9 @@ app.controller('commentsTabCtrl',
       $scope.refresh();
     };
     $scope.deleteComment = function(commentinfo) {
-      var url = "/chat?Name="+$scope.name+"&Message="+$scope.commentpost+"&Session="+$scope.keyForSession; 
+      var url = "/chat?Name="+commentinfo.Name+"&Message="+commentinfo.Message+"&Session="+commentinfo.Session; 
       $http.delete(url).then(function(response) {
+        console.log(url);
         console.log("deleted");
       });
       $scope.refresh();
