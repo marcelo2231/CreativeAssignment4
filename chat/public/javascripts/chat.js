@@ -155,8 +155,8 @@ app.controller('commentsTabCtrl',
       });
       $scope.refresh();
     };
-    $scope.findComents=function(user){
-      $http.get("/chat?n="+user.name+"&Session="+$scope.keyForSession).then(function(response){
+    $scope.findComents=function(){
+      $http.get("/chat?n="+$scope.searchName+"&Session="+$scope.keyForSession).then(function(response){
         $scope.usercomments=response.data;
       });
     };

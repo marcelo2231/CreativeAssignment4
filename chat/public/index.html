@@ -72,8 +72,8 @@
             </nav>
             <div class="findusertab">
                 <form class="inputform">
-                    <input type="text" value="" placeholder="Search for User Comments" name="movieSearchName" ng-model="movieSearchName">
-                    <button ng-click="search()">Search</button>
+                    <input type="text" value="" placeholder="Search for User Comments" name="searchName" ng-model="searchName">
+                    <button ng-click="findComents()">Search</button>
                 </form>
                 <ul class="comments">
                     <li ng-repeat="commentinfo in usercomments">
