@@ -22,9 +22,7 @@
 
         <div class="mainBody">
             <nav class=" navbar navbar-expand-lg navbar-dark bg-dark ">
-                <a class="navbar-brand " href="#/main">Messenger</a>
-                <button class="navbar-toggler " type="button " data-toggle="collapse " data-target="#navbarSupportedContent " aria-controls="navbarSupportedContent " aria-expanded="false " aria-label="Toggle navigation "><span class="navbar-toggler-icon "></span></button>
-
+                <a class="navbar-brand " href="#/main">Chattler</a>
             </nav>
 
             <div class="container ">
@@ -35,17 +33,31 @@
                 </div>
                 <div class="row ">
                     <div class="col-sm ">
-                        <form>
-                            <div class="form-name">
-                                <input ng-model="sessionName" type="text " class="form-control " id="name" aria-describedby="emailHelp " placeholder="Enter desired Username">
-                            </div>
-                            <center>
-                                <span>
-                                <a href="#/commentTab"><button type="submit " class="btn btn-danger " ng-click="begin()">Start</button></a>
-                                </span>
-                            </center>
-                        </form>
+
+                        <div class="form-name">
+                            <input ng-model="sessionName" type="text " id="name" placeholder="Enter desired Username">
+                        </div>
+                        <center>
+                            <ul>
+                                <li ng-repeat="aSession in allsessions">
+                                    <div class="sessionIds" ng-click="selectSession(aSession)" style="cursor:pointer ">
+                                        {{aSession}}<p style="cursor:pointer" ng-click="deleteSession(aSession)">X</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="sessionIds">
+                                        <textarea name="text" wrap="soft" rows="14" cols="10" placeholder="newSession" ng-model="newsession" ng-keyup="newSession()" class="sessionIDtext"></textarea>
+                                    </div>
+                                </li>
+                            </ul>
+                        </center>
+
                     </div>
+                </div>
+                <div class="row">
+                    <center>
+                        <button type="submit " class="btn btn-danger " ng-click="begin()">Start</button>
+                    </center>
                 </div>
             </div>
         </div>
@@ -54,39 +66,40 @@
     <script type="text/ng-template " id="/commentsTab.html ">
         <div class="container-fluid">
             <nav class=" navbar navbar-header navbar-dark bg-dark ">
-                <a class="navbar-brand " href="#/main">MOVIE NIGHT</a>
+                <a class="navbar-brand " href="#/main">Chattler</a>
+                <p class="navbar-text">User: {{name}}</p>
                 <p class="navbar-text"><a href="#">Session ID: {{keyForSession}}</a></p>
             </nav>
-            <div class="sidebar">
+            <div class="findusertab">
                 <form class="inputform">
-                    <input type="text" value="" placeholder="Search for Movies" ng-keyup="search()" name="movieSearchName" ng-model="movieSearchName">
+                    <input type="text" value="" placeholder="Search for User Comments" name="movieSearchName" ng-model="movieSearchName">
+                    <button ng-click="search()">Search</button>
                 </form>
                 <ul class="squish">
-                    <li ng-repeat="comment in namecomments">
-                        <p>{{commentinfo.name}} :: {{commentinfo.comment}}</p>
-                        <p2 ng-click="deleteComment(commentinfo) "style="cursor:pointer "> X</p2>
+                    <li ng-repeat="commentinfo in usercomments">
+                        <p>{{commentinfo.Message}} :: {{commentinfo.Message}}</p>
+                        <p2 ng-click="deleteComment(commentinfo) " style="cursor:pointer "> X</p2>
                     </li>
                 </ul>
             </div>
 
             <div class="middleBar">
                 <ul class="comments" ng-init="init() ">
-                    <li ng-repeat="comment in allcomments">
+                    <li ng-repeat="commentinfo in allcomments">
                         <div class="Avatar ">
-                            <p>{{commentinfo.name}} :: {{commentinfo.comment}}</p>
-                            <p2 ng-click="deleteComment(commentinfo) "style="cursor:pointer "> X</p2>
+                            <p>{{commentinfo.Name}} :: {{commentinfo.Message}}</p>
+                            <p2 ng-click="deleteComment(commentinfo) " style="cursor:pointer "> X</p2>
                         </div>
                     </li>
                 </ul>
                 <div id="commentFromUser">
                     <form>
-                        <p id="UserName"></p>
-                        <textarea ng-model="comment" name="text" rows="14" cols="10" wrap="soft" id="comment" placeholder="Add Comment Here"> </textarea>
+                        <textarea ng-model="commentpost" name="text" rows="14" cols="10" wrap="soft" id="commentpost" placeholder="Add Comment Here"> </textarea>
                     </form>
                     <div id="menu">
-                        <button id="postComment" ng-click="postComment()">Post Comment</button>
+                        <button id="postComment" ng-click="postMessage()">Post Comment</button>
                         <button id="getComments" ng-click="getComments()">Get Comments</button>
-                        <button id="deleteComments" ng-click="deleteComments()">Delete All</button>
+                        <button id="deleteAllComments" ng-click="deleteAllComments()">Delete All</button>
                     </div>
                 </div>
             </div>

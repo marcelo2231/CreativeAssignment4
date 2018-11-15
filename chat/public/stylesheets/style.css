@@ -1,12 +1,9 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin-top:0;
   color: rgb(50, 50, 50);
   background-color: white;
   font-family: 'Montserrat';
-  margin-left: 10%;
-  margin-right: 10%;
   position: relative;
   text-align: center;
   list-style-position: inside;
@@ -71,6 +68,7 @@ a {
   
 }
 #comments{
+  background-color: white;
   min-height: 40px;
   max-height: 350px;
   overflow: auto;
@@ -82,6 +80,7 @@ a {
   border-radius: 5px;
 }
 #usercomments{
+  background-color: white;
   margin-left: 5px;
   min-height: 40px;
   max-height: 80%;
@@ -106,4 +105,20 @@ li{
 }
 label{
   font-size:22px;
+}
+#commentpost{
+  width:100%;
+  height:100px;
+}
+.sessionIds{
+  width:20%;
+  background-color: white;
+  border:2px solid #4dffb8;
+  border-radius: 5px;
+  height:50px;
+  float:left;
+}
+.sessionIDtext{
+  width:100%;
+  height:100%;
 }
