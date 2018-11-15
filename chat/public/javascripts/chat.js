@@ -2,7 +2,7 @@ var infotext = "IT'S MOVIE NIGHT, and you haven't yet decided on a movie, instea
 var app = angular.module('app', ['ui.router']);
 var sessionname = 0;
 var sessionid=0;
-var color="";
+var color="#FFFFFF";
 
 app.config(function($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist(['**']);
@@ -105,8 +105,10 @@ app.controller('commentsTabCtrl',
     $scope.name = commentFactory.name;
     $scope.keyForSession = commentFactory.session;
     $scope.usercomments = commentFactory.searchcomments;
+    $scope.color=commentFactory.color;
     $scope.name=sessionname;
     $scope.keyForSession=sessionid;
+    $scope.color=color;
     console.log("name",$scope.name,sessionname);
     $scope.init = function() {
       $scope.refresh();
@@ -117,6 +119,7 @@ app.controller('commentsTabCtrl',
         console.log(response);
         $scope.allcomments = response["data"];
         console.log($scope.allcomments);
+        //$scope.color=response.data[
       });
     };
     $scope.getComments=function(){
@@ -138,6 +141,7 @@ app.controller('commentsTabCtrl',
       $http.post(url).then(function() {
         console.log("posted");
       });
+      $scope.commentpost="";
       $scope.refresh();
     };
     $scope.deleteAllComments = function() {
