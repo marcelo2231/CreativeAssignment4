@@ -110,9 +110,9 @@ app.controller('commentsTabCtrl',
     $scope.keyForSession=sessionid;
     $scope.color=color;
     console.log("name",$scope.name,sessionname);
-    $scope.init = function() {
-      $scope.refresh();
-    };
+    $interval(function(){
+            $scope.refresh();
+        },2000);
 
     $scope.refresh = function() {
       $http.get("/chat?Session="+$scope.keyForSession).then(function(response) {
