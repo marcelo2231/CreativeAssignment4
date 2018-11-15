@@ -160,6 +160,26 @@ app.controller('commentsTabCtrl',
         $scope.usercomments=response.data;
       });
     };
+    $scope.findMovie=function(moviename){
+      var url="https://api.themoviedb.org/3/search/movie?api_key=7678944848f7b822b6b11c2978c94dea&query="+moviename;
+      var imageurl = "https://image.tmdb.org/t/p/w500";
+      $http.get(url).then(function(response){
+        for (var x in response){
+          if (response["results"][x]["popularity"] > 3) {
+            var imgposter = imageurl + response["results"][x]["poster_path"]
+            var imgbkgrnd = imageurl + response["results"][x]["backdrop_path"]
+            $scope.usercomments.push({
+              Name: response["results"][x]["title"],
+              Message: response["results"][x]["overview"],
+              nameimage: imgposter,
+              backgrdimage: imgbkgrnd,
+              vote: response["results"][x]["vote_average"],
+              id: response["results"][x]["id"]
+             });
+          }
+        }
+      });
+    };
   });
 
 app.directive('avatar', avatarDirective);
