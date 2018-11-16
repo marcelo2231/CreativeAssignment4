@@ -71,14 +71,22 @@
                 <p class="navbar-text"><a href="#">Session ID: {{keyForSession}}</a></p>
             </nav>
             <div class="findusertab">
+            <p color="white" font-size="10px" >Search for either Movies or User comments</p>
+                <label class="switch">
+                    <input type="checkbox" id="togBtn" ng-click="toggleswitch()">
+                    <div class="slider round">
+                    <span class="on">User</span>
+                    <span class="off">Movie</span><!--END-->
+                    </div>
+                </label>
                 <form class="inputform">
-                    <input type="text" value="" placeholder="Search for User Comments" name="movieSearchName" ng-model="movieSearchName">
+                    <input type="text" value="" placeholder="Searching..." name="searchName" ng-model="searchName" ng-keyup="findMovie()">
                     <button ng-click="search()">Search</button>
                 </form>
                 <ul class="comments">
                     <li ng-repeat="commentinfo in usercomments">
                     <div class="individualComment">
-                        <p style="{{commentinfo.Color}}">{{commentinfo.Name}} :: {{commentinfo.Message}}</p>
+                        <p style="{{commentinfo.Color}}" ng-click="addToComment(commentinfo)">{{commentinfo.Name}} :: {{commentinfo.Message}}</p>
                         <p2 ng-click="deleteComment(commentinfo) " style="cursor:pointer "> X</p2>
                     </div>
                     </li>
@@ -97,12 +105,8 @@
                 <div id="commentFromUser">
                     <form>
                         <textarea ng-model="commentpost" name="text" rows="14" cols="10" wrap="soft" id="commentpost" placeholder="Add Comment Here"> </textarea>
+                        <br><button id="postComment" ng-click="postMessage()">Post Comment</button>
                     </form>
-                    <div id="menu">
-                        <button id="postComment" ng-click="postMessage()">Post Comment</button>
-                        <button id="getComments" ng-click="getComments()">Get Comments</button>
-                        <button id="deleteAllComments" ng-click="deleteAllComments()">Delete All</button>
-                    </div>
                 </div>
             </div>
         </div>

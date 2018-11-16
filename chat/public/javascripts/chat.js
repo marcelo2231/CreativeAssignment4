@@ -109,10 +109,11 @@ app.controller('commentsTabCtrl',
     $scope.name=sessionname;
     $scope.keyForSession=sessionid;
     $scope.color=color;
+    $scope.sidebarvalue=0;
     console.log("name",$scope.name,sessionname);
     $interval(function(){
-            //$scope.refresh();
-        },5000);
+        $scope.refresh();
+      },5000);
 
     $scope.refresh = function() {
       $http.get("/chat?Session="+$scope.keyForSession).then(function(response) {
@@ -155,30 +156,47 @@ app.controller('commentsTabCtrl',
       });
       $scope.refresh();
     };
-    $scope.findComents=function(user){
-      $http.get("/chat?n="+user.name+"&Session="+$scope.keyForSession).then(function(response){
+    $scope.search=function(){
+      $http.get("/chat?n="+$scope.searchName+"&Session="+$scope.keyForSession).then(function(response){
         $scope.usercomments=response.data;
       });
     };
-    $scope.findMovie=function(moviename){
-      var url="https://api.themoviedb.org/3/search/movie?api_key=7678944848f7b822b6b11c2978c94dea&query="+moviename;
+    $scope.findMovie=function(){
+      $scope.usercomments=[];
+      if($scope.sidebarvalue==0){
+      var url="https://api.themoviedb.org/3/search/movie?api_key=7678944848f7b822b6b11c2978c94dea&query="+$scope.searchName;
       var imageurl = "https://image.tmdb.org/t/p/w500";
+      console.log(url);
       $http.get(url).then(function(response){
-        for (var x in response){
-          if (response["results"][x]["popularity"] > 3) {
-            var imgposter = imageurl + response["results"][x]["poster_path"]
-            var imgbkgrnd = imageurl + response["results"][x]["backdrop_path"]
+        console.log(response.data);
+        console.log(response.data.results);
+        console.log(response.data.results[1]["popularity"]);
+        for (var x in response.data.results){
+          console.log(response.data.results[x]["title"]);
+          if (response["data"]["results"][x]["popularity"] > 3) {
+            var imgposter = imageurl + response.data["results"][x]["poster_path"];
+            var imgbkgrnd = imageurl + response.data["results"][x]["backdrop_path"];
             $scope.usercomments.push({
-              Name: response["results"][x]["title"],
-              Message: response["results"][x]["overview"],
+              Name: response.data["results"][x]["title"],
+              Message: response.data["results"][x]["overview"],
               nameimage: imgposter,
               backgrdimage: imgbkgrnd,
-              vote: response["results"][x]["vote_average"],
-              id: response["results"][x]["id"]
+              vote: response.data["results"][x]["vote_average"],
+              id: response.data["results"][x]["id"]
              });
           }
         }
       });
+      }
+    };
+    $scope.toggleswitch=function(){
+      $scope.usercomments=[];
+      $scope.searchName="";
+      $scope.sidebarvalue=($scope.sidebarvalue+1)%2;
+      console.log($scope.sidebarvalue);
+    };
+    $scope.addToComment=function(commentinfo){
+      $scope.commentpost=commentinfo.Name+"--"+commentinfo.Message;
     };
   });
 
@@ -192,7 +210,7 @@ function avatarDirective() {
     restrict: 'E',
     replace: 'true',
     template: (
-      '<div class ="Avatar">' +
+      '<div class ="individualComment">' +
       '<img ng-src="{{movies.nameimage}}"/>' +
       '<span id="adder" ng-click="incrementUpvotes(movie)">$ </span>' +
       '<span id="deleter" ng-click="deleteMovie(movie)"> X</span>' +
