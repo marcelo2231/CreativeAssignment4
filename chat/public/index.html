@@ -80,8 +80,9 @@
                     </div>
                 </label>
                 <form class="inputform">
+
                     <input type="text" value="" placeholder="Searching..." name="searchName" ng-model="searchName" ng-keyup="findMovie()">
-                    <button ng-click="search()">Search</button>
+                    <button ng-click="findComents()">Search</button>
                 </form>
                 <ul class="comments">
                     <li ng-repeat="commentinfo in usercomments">
