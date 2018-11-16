@@ -47,6 +47,7 @@ app.controller('MainCtrl',
     $scope.allsessions=commentFactory.allsessions;
     $scope.sessionId=commentFactory.session;
     $scope.color=commentFactory.color;
+    $scope.name=sessionname;
     $http.get("/distict?n=Session").then(function(response){
       $scope.allsessions=response.data;
     });

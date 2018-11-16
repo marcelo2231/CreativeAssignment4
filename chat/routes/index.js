@@ -123,10 +123,10 @@ router.delete('/chat', function(req, res, next) {
 module.exports = router;
 
 function getRandomColor() {
-  var letters = '1456789ABF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor((Math.random()+.05) * 9)];
-  }
+    //hsla(25, 100%, 50%, 1)
+  var color = 'hsla(';
+  color += Math.floor(Math.random() * 360);
+  color+=", 100%, 50%, 1)";
+  console.log("Color Selected",color);
   return color;
 }

@@ -40,13 +40,13 @@
                         <center>
                             <ul>
                                 <li ng-repeat="aSession in allsessions">
-                                    <div class="sessionIds" ng-click="selectSession(aSession)" style="cursor:pointer ">
+                                    <button class="sessionIds" ng-click="selectSession(aSession)" style="cursor:pointer ">
                                         {{aSession}}<p style="cursor:pointer" ng-click="deleteSession(aSession)">X</p>
-                                    </div>
+                                    </button>
                                 </li>
                                 <li>
                                     <div class="sessionIds">
-                                        <textarea name="text" wrap="soft" rows="14" cols="10" placeholder="Add New Session" ng-model="newsession" ng-keyup="newSession()" class="sessionIDtext"></textarea>
+                                        <textarea name="text" wrap="soft" rows="14" cols="10" placeholder="Add New Session" ng-model="newsession" ng-keyup="newSession()" class="sessionIDtext" style="margin-top: 0px; margin-bottom: 0px; height: 100%; color:white;"></textarea>
                                     </div>
                                 </li>
                             </ul>
@@ -54,24 +54,25 @@
 
                     </div>
                 </div>
-                <div class="row start">
-                    <center>
+                <div>
+                    <div>
                         <button type="submit " class="btn btn-danger " ng-click="begin()">Start</button>
-                    </center>
+                    </div>
                 </div>
             </div>
         </div>
     </script>
 
     <script type="text/ng-template " id="/commentsTab.html ">
-        <div class="container-fluid">
+        <div class="mainBody">
             <nav class=" navbar navbar-header navbar-dark bg-dark ">
                 <a class="navbar-brand " href="#/main">Chattler</a>
                 <p class="navbar-text">User: {{name}}</p>
                 <p class="navbar-text"><a href="#">Session ID: {{keyForSession}}</a></p>
             </nav>
+            
             <div class="findusertab">
-            <p color="white" font-size="10px" >Search for either Movies or User comments</p>
+                <p1>Search for either Movies or User comments</p>
                 <label class="switch">
                     <input type="checkbox" id="togBtn" ng-click="toggleswitch()">
                     <div class="slider round">
@@ -80,14 +81,13 @@
                     </div>
                 </label>
                 <form class="inputform">
-
                     <input type="text" value="" placeholder="Searching..." name="searchName" ng-model="searchName" ng-keyup="findMovie()">
                     <button ng-click="findComents()">Search</button>
                 </form>
                 <ul class="comments">
                     <li ng-repeat="commentinfo in usercomments">
                     <div class="individualComment">
-                        <p style="{{commentinfo.Color}}" ng-click="addToComment(commentinfo)">{{commentinfo.Name}} :: {{commentinfo.Message}}</p>
+                        <p style="color:{{commentinfo.Color}}" ng-click="addToComment(commentinfo)">{{commentinfo.Name}} &nbsp; :: &nbsp; {{commentinfo.Message}}</p>
                         <p2 ng-click="deleteComment(commentinfo) " style="cursor:pointer "> X</p2>
                     </div>
                     </li>
@@ -95,17 +95,19 @@
             </div>
 
             <div class="middleBar">
-                <ul class="comments" ng-init="init() ">
+                <div class="flip">
+                <ul class="comments" ng-init="refresh()" ng-model="comments">
                     <li ng-repeat="commentinfo in allcomments">
                         <div class="individualComment">
-                            <p style="color:{{commentinfo.Color}}">{{commentinfo.Name}} :: {{commentinfo.Message}}</p>
+                            <p style="color:{{commentinfo.Color}}">{{commentinfo.Name}} &nbsp; :: &nbsp; {{commentinfo.Message}}</p>
                             <p2 ng-click="deleteComment(commentinfo) " style="cursor:pointer "> X</p2>
                         </div>
                     </li>
                 </ul>
+                </div>
                 <div id="commentFromUser">
                     <form>
-                        <textarea ng-model="commentpost" name="text" rows="14" cols="10" wrap="soft" id="commentpost" placeholder="Add Comment Here"> </textarea>
+                        <textarea ng-model="commentpost" name="text" rows="14" cols="10" wrap="soft" id="commentpost" placeholder="Add Comment Here" maxlength="600"> </textarea>
                         <br><button id="postComment" ng-click="postMessage()">Post Comment</button>
                     </form>
                 </div>
